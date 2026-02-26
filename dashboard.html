@@ -1,3 +1,32 @@
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCKc3A3y0jsRgY7t7NyPMzffhsUJfclUYg",
+    authDomain: "quickloanapp-d1de5.firebaseapp.com",
+    projectId: "quickloanapp-d1de5",
+    storageBucket: "quickloanapp-d1de5.firebasestorage.app",
+    messagingSenderId: "668180967064",
+    appId: "1:668180967064:web:17aa5c053de9cecf842aed",
+    measurementId: "G-0K2SXWYK8F"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Redirect if user not logged in
+  onAuthStateChanged(auth, (user) => {
+      if (!user) {
+          // Not logged in, redirect to login page
+          window.location.href = "login.html";
+      }
+  });
+
+  window.auth = auth;
+</script>
+
+<script src="script.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
