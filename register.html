@@ -51,6 +51,25 @@
                 Already have an account? <a href="login.html">Login here</a>
             </p>
         </div>
+        <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+  import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCKc3A3y0jsRgY7t7NyPMzffhsUJfclUYg",
+    authDomain: "quickloanapp-d1de5.firebaseapp.com",
+    projectId: "quickloanapp-d1de5",
+    storageBucket: "quickloanapp-d1de5.firebasestorage.app",
+    messagingSenderId: "668180967064",
+    appId: "1:668180967064:web:17aa5c053de9cecf842aed",
+    measurementId: "G-0K2SXWYK8F"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.auth = auth; // make it global so other scripts can use it
+        </script>
     </section>
 
     <!-- FOOTER -->
