@@ -100,7 +100,36 @@ if (window.location.pathname.includes("login.html")) {
         window.location.href = "dashboard.html";
     });
 }
+// LOGIN LOGIC
+const loginForm = document.getElementById('loginForm');
 
+if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        firebaseLogin(email, password);
+    });
+}
+
+// Function to login user with Firebase
+function firebaseLogin(email, password) {
+    import("https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js")
+    .then(({ signInWithEmailAndPassword }) => {
+        const auth = window.auth;
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert("Login successful!");
+                localStorage.setItem("loggedInUser", userCredential.user.uid);
+                window.location.href = "dashboard.html";
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+            });
+    });
+}
 
 // DASHBOARD DISPLAY
 if (window.location.pathname.includes("dashboard.html")) {
