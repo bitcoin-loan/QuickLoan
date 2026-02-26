@@ -34,7 +34,40 @@ if (window.location.pathname.includes("register.html")) {
         window.location.href = "login.html";
     });
 }
+// REGISTER LOGIC
+const registerForm = document.getElementById('registerForm');
 
+if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // prevent page reload
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        firebaseRegister(email, password);
+    });
+}
+
+// Function to register user with Firebase
+function firebaseRegister(email, password) {
+    import("https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js").then(({ getAuth, createUserWithEmailAndPassword }) => {
+        const auth = window.auth; // we initialized this in register.html
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                alert("Registration successful! Please login.");
+                window.location.href = "login.html";
+            })
+            .catch((error) => {
+                alert("Error: " + error.message);
+            });
+    });
+}
 
 // LOGIN FUNCTION
 if (window.location.pathname.includes("login.html")) {
